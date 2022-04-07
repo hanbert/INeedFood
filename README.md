@@ -15,5 +15,3 @@
 7. vscode 选择刚刚连接的设备进行调试
    <img src="./assets/vscode-autojs.jpeg" width="300">
 
-> 如果还有不懂的也可以加我微信，at-529，加好友时请备注：robFood
-> 如果对你有帮助请给个 **star** 支持，谢谢~~# INeedFood
