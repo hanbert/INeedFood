@@ -28,27 +28,13 @@ const musicNotify = () => {
 const start = () => {
 	var isSuccess = false
 	while (!isSuccess) {
-		if (descStartsWith('盒区团购').exists()) {
-			id("home_page_recycler_view").findOne().children().forEach(child => {
-				var target = child.findOne(className("android.view.ViewGroup").desc("盒区团购"));
-				if(target) {
-					target.click();
-				} else {
-					toastLog('没有入口')
-				}
-			});
+		if(desc('盒区团购').exists()) {
+			desc('盒区团购').findOne().click()
 			sleep(1000)
-		} else if (hasText('提价')) {
-
-		} else {
-			className("android.view.View").untilFind().click()
-			var flag = bounds(33, 2196, 1047, 2356).click()
-			if (flag) {
-				isSuccess = true
-			} else {
-				back()
-			}
-			sleep(500)
+		} else if (!textContains('蔬菜').exists()) {
+			toastLog('没有蔬菜')
+			back()
+			sleep(1000)
 		}
 	}
 }
