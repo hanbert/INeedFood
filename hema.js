@@ -31,7 +31,7 @@ const start = () => {
 		if(desc('盒区团购').exists()) {
 			desc('盒区团购').findOne().click()
 			sleep(1000)
-		} else if (!textContains('蔬菜').exists()) {
+		} else if (!textContains('立即下单').exists()) {
 			toastLog('没有蔬菜')
 			back()
 			sleep(1000)
