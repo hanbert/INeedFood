@@ -1,5 +1,5 @@
 auto.waitFor()
-const appName = "盒马";
+const appName = "每日优鲜";
 launchApp(appName);
 sleep(3000);
 // 点击按钮
@@ -28,12 +28,20 @@ const musicNotify = () => {
 const start = () => {
 	var isSuccess = false
 	while (!isSuccess) {
-		if(desc('盒区团购').exists()) {
-			desc('盒区团购').findOne().click()
-			sleep(5000)
-		} else if (textContains('运力已约满').exists() || !textContains('蔬菜').exists()) {
-			console.log("刷新")
-			back()
+		if(descStartsWith('去结算').exists()) {
+			descStartsWith('去结算').findOne().click()
+			sleep(1000)
+		} else if(descStartsWith('知道了').exists()) {
+			descStartsWith('知道了').findOne().click()
+			sleep(1000)
+		} else if(descStartsWith('提交订单').exists()) {
+			descStartsWith('提交订单').findOne().click()
+			sleep(1000)
+		} else if(descStartsWith('去支付').exists()) {
+			descStartsWith('去支付').findOne().click()
+			sleep(1000)
+		} else if(descStartsWith('确定').exists()) {
+			descStartsWith('确定').findOne().click()
 			sleep(1000)
 		}
 	}

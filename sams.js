@@ -1,5 +1,5 @@
 auto.waitFor()
-const appName = "盒马";
+const appName = "山姆会员商店";
 launchApp(appName);
 sleep(3000);
 // 点击按钮
@@ -27,15 +27,32 @@ const musicNotify = () => {
 
 const start = () => {
 	var isSuccess = false
+	var tryCount = 0
 	while (!isSuccess) {
-		if(desc('盒区团购').exists()) {
-			desc('盒区团购').findOne().click()
-			sleep(5000)
-		} else if (textContains('运力已约满').exists() || !textContains('蔬菜').exists()) {
-			console.log("刷新")
-			back()
+		// toastLog('开抢了~~')
+		if (hasText('结算')) {
+			className("android.widget.Button").textStartsWith('结算').findOne().click()
+			// toastLog('结算~~')
 			sleep(1000)
-		}
+		} else if (hasText('今日订单已达上限')) {
+			clickSettle('今日订单已达上限')
+			sleep(500)
+		} else if (hasText('配送时间已约满')) {
+			click('我知道了')
+			tryCount = tryCount + 1
+			if (tryCount >= 5) {
+				back()
+				tryCount = 0
+			}
+			sleep(500)
+		} else if (hasText('去支付')) {
+			clickSettle('去支付')
+			sleep(500)
+		} else if (hasText('确认支付')) {
+			click('支付宝')
+			click('确认支付')
+			sleep(500)
+		} 
 	}
 }
 start()

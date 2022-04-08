@@ -22,10 +22,10 @@ const start = () => {
 		if (hasText('结算')) {
 			clickSettle('结算')
 			sleep(1000)
-		} else if (hasText('当前不在可下单时段')) {
+		} else if (hasText('我知道了')) {
 			clickSettle('我知道了')
 			sleep(500)
-		} else if (hasText('前方拥堵') || hasText('我知道了') || hasText('返回购物车') || hasText('站点自提')) {
+		} else if (hasText('返回购物车') || hasText('站点自提')) {
 			back()
 			sleep(500)
 		} else if (hasText('重新加载')) {
@@ -37,14 +37,15 @@ const start = () => {
 		} else if (hasText('立即支付')) {
 			clickSettle('立即支付')
 			sleep(500)
+			className("android.widget.TextView").text("我知道了").findOnce().parent().click()
+			sleep(500)
 		} else if (hasText('确认支付')) {
 			isSuccess = true
 			sleep(500)
 		} else if (!hasText('结算')) {
-			toastLog('刷新')
-			// press(100, 100, 1000)
-			// gesture(1000, [100, 100], [100, 500])
-			swipe(100, 100, 100, 500, 1000)
+			className("android.widget.TextView").text("我常买").findOne().parent().click()
+			className("android.widget.TextView").text("购物车").findOne().parent().click()
+			sleep(500)
 		}
 	}
 }
