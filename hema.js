@@ -31,7 +31,25 @@ const start = () => {
 		if(desc('盒区团购').exists()) {
 			desc('盒区团购').findOne().click()
 			sleep(1000)
-		} else if (!textContains('立即下单').exists()) {
+		} else if (textContains('立即下单').exists()) {
+			var flag = className("android.view.View").textStartsWith('立即下单').findOne().click()
+			sleep(1000)
+		} else if (textStartsWith('选择商品后即可下单').exists()) {
+			//选商品
+			className('android.view.View').clickable().depth(16).find().forEach((elem) => {
+				elem.click()
+			})
+			sleep(1000)
+		} else if (textStartsWith('提交订单').exists()) {
+			click('提交订单')
+			sleep(1000)
+		} else if (textStartsWith('确认').exists()) {
+			text('确认').findOnce().click()
+			sleep(1000)
+		}  else if (textStartsWith('很抱歉').exists()) {
+			textStartsWith('确定').findOnce().parent().click()
+			sleep(1000)
+		} else if (!textContains('蔬菜').exists()) {
 			toastLog('没有蔬菜')
 			back()
 			sleep(1000)

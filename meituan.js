@@ -40,6 +40,11 @@ const start = () => {
 		} else if (hasText('确认支付')) {
 			isSuccess = true
 			sleep(500)
+		} else if (!hasText('结算')) {
+			toastLog('刷新')
+			// press(100, 100, 1000)
+			// gesture(1000, [100, 100], [100, 500])
+			swipe(100, 100, 100, 500, 1000)
 		}
 	}
 }
