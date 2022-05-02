@@ -4,8 +4,8 @@ launchApp(appName);
 sleep(3000);
 // 点击按钮
 const clickSettle = (text) => {
-	className("android.widget.TextView").textStartsWith(text).findOne().parent().click()
-	// textStartsWith(text).findOne().click()
+	className("android.widget.TextView").textStartsWith(text).findOnce().parent().click()
+	// textStartsWith(text).findOnce().click()
 }
 const hasText = (text) => {
 	return textStartsWith(text).exists() // 是否存在指定文本
@@ -43,8 +43,8 @@ const start = () => {
 			isSuccess = true
 			sleep(500)
 		} else if (!hasText('结算')) {
-			className("android.widget.TextView").text("我常买").findOne().parent().click()
-			className("android.widget.TextView").text("购物车").findOne().parent().click()
+			className("android.widget.TextView").text("我常买").findOnce().parent().click()
+			className("android.widget.TextView").text("购物车").findOnce().parent().click()
 			sleep(500)
 		}
 	}

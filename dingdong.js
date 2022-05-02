@@ -78,9 +78,11 @@ const start = () => {
 				canPay = id('tv_submit').findOne().click()
 			}
 			// toastLog('准备支付!!!')
-			sleep(random(300, 800))
-			click("选择送达时间")
-			sleep(random(300, 800))
+			sleep(random(800, 1000))
+			if (hasText('选择送达时间')) {
+				click("选择送达时间")
+				sleep(random(300, 800))
+			}
 		} else if (hasText('继续支付')) {
 			id('tv_goto_pay').findOnce().click()
 			sleep(random(300, 800))
