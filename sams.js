@@ -4,11 +4,15 @@ launchApp(appName);
 sleep(3000);
 // 点击按钮
 const clickSettle = (text) => {
-	className("android.widget.TextView").textStartsWith(text).findOne().click()
+	var button = className("android.widget.TextView").textStartsWith(text).findOnce()
+	if (button) {
+		button.click()
+	}
+	
 }
 // 点击父按钮
 const clickParentSettle = (text) => {
-	className("android.widget.TextView").textStartsWith(text).findOne().parent().click()
+	className("android.widget.TextView").textStartsWith(text).findOnce().parent().click()
 }
 //选择配送时间
 const selectTime = (text, count) => {
@@ -31,27 +35,30 @@ const start = () => {
 	while (!isSuccess) {
 		// toastLog('开抢了~~')
 		if (hasText('结算')) {
-			className("android.widget.Button").textStartsWith('结算').findOne().click()
+			var jiesuan = className("android.widget.Button").textStartsWith('结算').findOnce()
+			if (jiesuan) {
+				jiesuan.click()
+			}
 			// toastLog('结算~~')
-			sleep(1000)
+			sleep(random(300, 800))
 		} else if (hasText('今日订单已达上限')) {
 			clickSettle('今日订单已达上限')
-			sleep(500)
-		} else if (hasText('配送时间已约满')) {
+			sleep(random(300, 800))
+		} else if (hasText('配送时间已约满') || hasText('提示')) {
 			click('我知道了')
 			tryCount = tryCount + 1
 			if (tryCount >= 5) {
 				back()
-				tryCount = 0
+				// tryCount = 0
 			}
-			sleep(500)
+			sleep(random(300, 800))
 		} else if (hasText('去支付')) {
 			clickSettle('去支付')
-			sleep(500)
+			sleep(random(300, 800))
 		} else if (hasText('确认支付')) {
 			click('支付宝')
 			click('确认支付')
-			sleep(500)
+			sleep(random(300, 800))
 		} 
 	}
 }

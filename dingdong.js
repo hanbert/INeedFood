@@ -32,28 +32,28 @@ const start = () => {
 		// toastLog('开抢了~~')
 		if (hasText('去结算')) {
 			clickSettle('去结算')
-			sleep(1000)
+			sleep(random(300, 800))
 		} else if (hasText('重新加载')) {
 			clickParentSettle('重新加载')
-			sleep(500)
+			sleep(random(300, 800))
 		} else if (hasText('返回购物车') && !hasText('正在加载')) {
 			clickSettle('返回购物车')
 			// toastLog('返回购物车')
-			sleep(500)
+			sleep(random(300, 800))
 		} else if (hasText('请选择送达时间')) {
 			var flag = id('tv_multi_product_time_text').findOne().click()
 			while (!flag) {
 				flag = id('tv_multi_product_time_text').findOne().click()
 			}
 			// toastLog('唤起时间选择面板')
-			sleep(500)
+			sleep(random(300, 800))
 		} else if (hasText('选择送达时间')) {
 			var noHour = id('tv_select_time_no_hour').findOnce();
 			if(noHour) {
 				id('iv_dialog_select_time_close').click()
 				// toastLog('无可预约时间')
 				back()
-				sleep(500)
+				sleep(random(300, 800))
 				continue
 			}
 			var timeContent = id("rv_selected_hour").findOne()
@@ -63,13 +63,13 @@ const start = () => {
 			if (timeCount <= 6 && target.parent().click()) {
 				timeCount = timeCount + 1
 				// toastLog('时间:' + target.text())
-				sleep(50)
+				sleep(random(30, 100))
 			} else {
 				timeCount = 0
 				id('iv_dialog_select_time_close').click()
 				// toastLog('无合适配送时间')
 				back()
-				sleep(500)
+				sleep(random(300, 800))
 				continue
 			}
 		} else if (hasText('立即支付')) {
@@ -78,12 +78,12 @@ const start = () => {
 				canPay = id('tv_submit').findOne().click()
 			}
 			// toastLog('准备支付!!!')
-			sleep(1000)
+			sleep(random(300, 800))
 			click("选择送达时间")
-			sleep(500)
+			sleep(random(300, 800))
 		} else if (hasText('继续支付')) {
 			id('tv_goto_pay').findOnce().click()
-			sleep(100)
+			sleep(random(300, 800))
 		}
 	}
 }
