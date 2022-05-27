@@ -44,6 +44,14 @@ const start = () => {
 			}
 			// toastLog('结算~~')
 			sleep(random(300, 800))
+		} else if (hasText('返回修改')) {
+			clickSettle('返回修改')
+			sleep(random(300, 800))
+		} else if (id('settle_oos_content_tv').text('请选择').findOnce()) {
+			id("settle_oos_hint").findOne().click()
+			sleep(random(300, 800))
+			textStartsWith('其他商品继续配送').findOne().parent().click()
+			sleep(random(300, 800))
 		} else if (hasText('今日订单已达上限')) {
 			clickSettle('今日订单已达上限')
 			sleep(random(300, 800))
@@ -52,20 +60,17 @@ const start = () => {
 			sleep(random(300, 800))
 		} else if (hasText('配送时间已约满') || hasText('提示')) {
 			click('我知道了')
-			tryCount = tryCount + 1
-			if (tryCount >= 5) {
-				back()
-				// tryCount = 0
-			}
+			back()
 			sleep(random(300, 800))
 		} else if (hasText('去支付')) {
+			textStartsWith('支付宝').depth(13).findOne().parent().parent().click()
+			var aggree = text('我已阅读并同意').checked(false).findOnce()
+			if (aggree) {
+				aggree.click()
+			}
 			clickSettle('去支付')
 			sleep(random(300, 800))
-		} else if (hasText('确认支付')) {
-			click('支付宝')
-			click('确认支付')
-			sleep(random(300, 800))
-		} 
+		}
 	}
 }
 start()
